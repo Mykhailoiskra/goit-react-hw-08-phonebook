@@ -7,6 +7,7 @@ import App from "./App";
 import persistedStore from "./redux/store";
 
 import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <Provider store={persistedStore.store}>
