@@ -14,8 +14,8 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import itemsReducer from "./itemsSlice";
-import filterReducer from "./filterSlice";
+import itemsReducer from "./contacts/itemsSlice";
+import filterReducer from "./contacts/filterSlice";
 
 const rootPersistConfig = {
   key: "root",

@@ -1,19 +1,26 @@
-import ContactList from "components/ContactList/ContactList.jsx";
-import ContactForm from "components/ContactForm/ContactForm.jsx";
-import Filter from "components/Filter/Filter.jsx";
+import { Switch, Route } from "react-router-dom";
+
+import Container from "react-bootstrap/Container";
+
+import ContactList from "views/ContactList";
 import Header from "components/Header";
+import Homepage from "views/Homepage";
+import Register from "views/Register";
+import Login from "views/Login";
 
 import "./App.css";
 
 export default function App() {
   return (
-    <div className="main_container">
+    <Container>
       <Header />
-      <ContactForm />
 
-      <h2 className="contacts_heading">Contacts</h2>
-      <Filter />
-      <ContactList />
-    </div>
+      <Switch>
+        <Route exact path="/" component={Homepage} />
+        <Route path="/contacts" component={ContactList} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
+      </Switch>
+    </Container>
   );
 }
