@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
+import operations from "redux/auth/authOperations";
+
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const handleFormChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -20,7 +24,9 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted");
+    dispatch(operations.login({ email, password }));
+    setEmail("");
+    setPassword("");
   };
 
   return (
