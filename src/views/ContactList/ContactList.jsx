@@ -1,10 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
+//Bootstrap react components
+import Button from "react-bootstrap/Button";
+
+// Custom components
 import Contact from "components/Contact";
 import Filter from "components/Filter";
 import Modal from "components/Modal";
-import Button from "react-bootstrap/Button";
+import AddContactForm from "components/AddContactForm";
 
 import { getFilteredContacts } from "redux/contacts/selectors";
 import { getContacts } from "redux/contacts/contactsOperations";
@@ -32,7 +36,11 @@ const ContactList = () => {
       <Button variant="primary" onClick={toggleModal}>
         Add Contact
       </Button>
-      {modal && <Modal onClose={toggleModal}></Modal>}
+      {modal && (
+        <Modal onClose={toggleModal}>
+          <AddContactForm onSubmit={toggleModal} />
+        </Modal>
+      )}
       <Filter />
       {contacts.length > 0 ? (
         <ul className={s.contactList}>

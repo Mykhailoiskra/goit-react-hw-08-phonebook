@@ -3,12 +3,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 // Components
-import { addContact } from "redux/contacts/itemsSlice";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { addContact } from "redux/contacts/contactsOperations";
 
-// Other staff
-import s from "./ContactForm.module.css";
-
-export default function ContactForm() {
+export default function AddContactForm({ onSubmit }) {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const dispatch = useDispatch();
@@ -31,6 +30,7 @@ export default function ContactForm() {
     event.preventDefault();
     dispatch(addContact({ name, number }));
     reset();
+    onSubmit();
   };
 
   const reset = () => {
@@ -39,30 +39,30 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={s.form}>
-      <label className={s.form__label}>
-        Name
-        <input
-          className={s.form__input}
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="contact/name">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
           type="text"
+          placeholder="Name"
           name="name"
           value={name}
           onChange={handleChange}
-        ></input>
-      </label>
-      <label className={s.form__label}>
-        Number
-        <input
-          className={s.form__input}
-          type="text"
+        />
+      </Form.Group>
+      <Form.Group controlId="contact/phone">
+        <Form.Label>Phone</Form.Label>
+        <Form.Control
+          type="number"
+          placeholder="phone number"
           value={number}
           name="number"
           onChange={handleChange}
-        ></input>
-      </label>
-      <button className={s.form__btn} type="submit">
-        Add
-      </button>
-    </form>
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
   );
 }
