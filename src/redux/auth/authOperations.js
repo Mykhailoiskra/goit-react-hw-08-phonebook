@@ -11,23 +11,27 @@ const token = {
   },
 };
 
-const register = createAsyncThunk("user/register", async (credentials) => {
-  try {
-    const { data } = await axios.post("/users/signup", credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    alert("Please use other credentials");
+const register = createAsyncThunk(
+  "user/register",
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.post("/users/signup", credentials);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      alert("Please use other credentials");
+      return thunkAPI.rejectWithValue();
+    }
   }
-});
+);
 
-const login = createAsyncThunk("user/login", async (credentials) => {
+const login = createAsyncThunk("user/login", async (credentials, thunkAPI) => {
   try {
     const { data } = await axios.post("/users/login", credentials);
     token.set(data.token);
     return data;
   } catch (error) {
-    console.log(error);
+    return thunkAPI.rejectWithValue();
   }
 });
 
@@ -40,10 +44,32 @@ const logout = createAsyncThunk("user/logout", async () => {
   }
 });
 
+const fetchCurrentUser = createAsyncThunk(
+  "user/fetchCurrent",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const currentToken = state.auth.token;
+
+    if (currentToken === null) {
+      return thunkAPI.rejectWithValue();
+    }
+
+    token.set(currentToken);
+
+    try {
+      const { data } = await axios.get("/users/current");
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const operations = {
   register,
   login,
   logout,
+  fetchCurrentUser,
 };
 
 export default operations;
