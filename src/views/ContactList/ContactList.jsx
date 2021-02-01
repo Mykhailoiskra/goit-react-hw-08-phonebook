@@ -11,7 +11,7 @@ import Modal from "components/Modal";
 import AddContactForm from "components/AddContactForm";
 
 import { getFilteredContacts } from "redux/contacts/selectors";
-import { getContacts } from "redux/contacts/contactsOperations";
+import { getContacts, deleteContact } from "redux/contacts/contactsOperations";
 import { isLoggedIn } from "redux/auth/authSelectors";
 
 import s from "./ContactList.module.css";
@@ -50,7 +50,7 @@ const ContactList = () => {
                 name={name}
                 number={number}
                 onDelete={() => {
-                  console.log("Clicked delete");
+                  dispatch(deleteContact(id));
                 }}
               />
             </li>
