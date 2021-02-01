@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
@@ -8,6 +8,8 @@ import Header from "components/Header";
 import Homepage from "views/Homepage";
 import Register from "views/Register";
 import Login from "views/Login";
+import PrivateRoute from "components/PrivateRoute";
+import PublicRoute from "components/PublicRoute";
 
 import operations from "redux/auth/authOperations";
 
@@ -25,10 +27,21 @@ export default function App() {
       <Header />
 
       <Switch>
-        <Route exact path="/" component={Homepage} />
-        <Route path="/contacts" component={ContactList} />
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
+        <PublicRoute exact path="/">
+          <Homepage />
+        </PublicRoute>
+
+        <PublicRoute path="/register" redirectTo="/contacts" restricted>
+          <Register />
+        </PublicRoute>
+
+        <PublicRoute path="/login" redirectTo="/contacts" restricted>
+          <Login />
+        </PublicRoute>
+
+        <PrivateRoute path="/contacts" redirectTo="/login">
+          <ContactList />
+        </PrivateRoute>
       </Switch>
     </Container>
   );

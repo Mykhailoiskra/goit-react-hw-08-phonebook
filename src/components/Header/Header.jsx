@@ -19,19 +19,11 @@ export default function Header() {
         Contacts Book
       </Navbar.Brand>
 
-      <Nav className="mr-auto">
-        <Nav.Link as={NavLink} to="/register">
-          Register
-        </Nav.Link>
-        <Nav.Link as={NavLink} to="/login">
-          Log In
-        </Nav.Link>
-        <Nav.Link as={NavLink} to="/contacts">
-          Contacts
-        </Nav.Link>
-      </Nav>
-      {userLoggedIn && (
-        <>
+      {userLoggedIn ? (
+        <Nav className="mr-auto">
+          <Nav.Link as={NavLink} to="/contacts">
+            Contacts
+          </Nav.Link>
           <Navbar.Text>Hello, {name}</Navbar.Text>
           <Button
             type="button"
@@ -40,7 +32,16 @@ export default function Header() {
           >
             Log out
           </Button>
-        </>
+        </Nav>
+      ) : (
+        <Nav className="mr-auto">
+          <Nav.Link as={NavLink} to="/register">
+            Register
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/login">
+            Log In
+          </Nav.Link>
+        </Nav>
       )}
     </Navbar>
   );
