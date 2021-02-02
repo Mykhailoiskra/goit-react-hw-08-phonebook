@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 import operations from "redux/auth/authOperations";
+import { isLoading } from "redux/auth/authSelectors";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const loading = useSelector(isLoading);
 
   const handleFormChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -52,8 +54,8 @@ export default function Register() {
           onChange={handleFormChange}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
+      <Button variant="dark" type="submit" disabled={loading}>
+        {loading ? "Loading..." : "Login"}
       </Button>
     </Form>
   );
