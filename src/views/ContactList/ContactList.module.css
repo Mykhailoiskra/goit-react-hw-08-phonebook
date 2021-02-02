@@ -3,7 +3,7 @@
   padding-inline-start: 0;
 }
 
-.contactList__item {
+/* .contactList__item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -44,4 +44,4 @@
   border-radius: 4px;
   padding: 10px;
   cursor: pointer;
-}
+} */
