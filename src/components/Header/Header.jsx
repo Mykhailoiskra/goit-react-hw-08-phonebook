@@ -19,30 +19,32 @@ export default function Header() {
         Contacts Book
       </Navbar.Brand>
 
-      {userLoggedIn ? (
-        <Nav className="mr-auto">
-          <Nav.Link as={NavLink} to="/contacts">
-            Contacts
-          </Nav.Link>
-          <Navbar.Text>Hello, {name}</Navbar.Text>
-          <Button
-            type="button"
-            size="sm"
-            onClick={() => dispatch(operations.logout())}
-          >
-            Log out
-          </Button>
-        </Nav>
-      ) : (
-        <Nav className="mr-auto">
-          <Nav.Link as={NavLink} to="/register">
-            Register
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/login">
-            Log In
-          </Nav.Link>
-        </Nav>
-      )}
+      <Nav>
+        {userLoggedIn ? (
+          <>
+            <Nav.Link as={NavLink} to="/contacts">
+              Contacts
+            </Nav.Link>
+            <Navbar.Text>Hello, {name}</Navbar.Text>
+            <Button
+              type="button"
+              size="sm"
+              onClick={() => dispatch(operations.logout())}
+            >
+              Log out
+            </Button>
+          </>
+        ) : (
+          <>
+            <Nav.Link as={NavLink} to="/register">
+              Register
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/login">
+              Log In
+            </Nav.Link>
+          </>
+        )}
+      </Nav>
     </Navbar>
   );
 }

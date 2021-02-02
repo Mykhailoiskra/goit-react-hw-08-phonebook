@@ -1,7 +1,8 @@
 import { Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
+import Loader from "react-loader-spinner";
 import Container from "react-bootstrap/Container";
 import ContactList from "views/ContactList";
 import Header from "components/Header";
@@ -12,17 +13,30 @@ import PrivateRoute from "components/PrivateRoute";
 import PublicRoute from "components/PublicRoute";
 
 import operations from "redux/auth/authOperations";
+import { isFetchingUser } from "redux/auth/authSelectors";
 
 import "./App.css";
 
 export default function App() {
   const dispatch = useDispatch();
+  const fetchingUser = useSelector(isFetchingUser);
 
   useEffect(() => {
     dispatch(operations.fetchCurrentUser());
   }, [dispatch]);
 
-  return (
+  return fetchingUser ? (
+    <Loader
+      type="Puff"
+      color="#343a40"
+      height={150}
+      width={150}
+      style={{
+        textAlign: "center",
+        marginTop: "100px",
+      }}
+    />
+  ) : (
     <Container>
       <Header />
 

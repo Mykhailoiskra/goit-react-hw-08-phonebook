@@ -9,6 +9,7 @@ import { store, persistor } from "./redux/store";
 
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 ReactDOM.render(
   <React.StrictMode>
