@@ -4,11 +4,11 @@ import s from "./Contact.module.css";
 
 const Contact = ({ name, number, onDelete }) => {
   return (
-    <Card className={s.card}>
+    <Card className={s.contact} bg="dark" text="light">
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>Phone: {number}</Card.Text>
-        <Button variant="primary" onClick={onDelete}>
+        <Button variant="outline-light" onClick={onDelete}>
           Delete
         </Button>
       </Card.Body>

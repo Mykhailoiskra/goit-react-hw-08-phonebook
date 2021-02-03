@@ -1,14 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 //Bootstrap react components
-import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
 // Custom components
 import Contact from "components/Contact";
-import Filter from "components/Filter";
-import Modal from "components/Modal";
-import AddContactForm from "components/AddContactForm";
+import ContactsMenu from "components/ContactsMenu";
 
 import { getFilteredContacts } from "redux/contacts/selectors";
 import { getContacts, deleteContact } from "redux/contacts/contactsOperations";
@@ -21,9 +19,6 @@ const ContactList = () => {
   const dispatch = useDispatch();
   const userLogged = useSelector(isLoggedIn);
 
-  const [modal, setModal] = useState(false);
-  const toggleModal = () => setModal((state) => !state);
-
   useEffect(() => {
     if (!userLogged) {
       return;
@@ -32,16 +27,8 @@ const ContactList = () => {
   }, [dispatch, userLogged]);
 
   return (
-    <>
-      <Button variant="primary" onClick={toggleModal}>
-        Add Contact
-      </Button>
-      {modal && (
-        <Modal onClose={toggleModal}>
-          <AddContactForm onSubmit={toggleModal} />
-        </Modal>
-      )}
-      <Filter />
+    <Container>
+      <ContactsMenu />
       {contacts.length > 0 ? (
         <ul className={s.contactList}>
           {contacts.map(({ id, name, number }) => (
@@ -59,7 +46,7 @@ const ContactList = () => {
       ) : (
         <h1>You don't have any contacts yet</h1>
       )}
-    </>
+    </Container>
   );
 };
 

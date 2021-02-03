@@ -16,6 +16,7 @@ const Filter = () => {
         value={value}
         onChange={(event) => dispatch(changeFilter(event.target.value))}
         className={s.filter__input}
+        placeholder="Enter name..."
       ></input>
     </label>
   );
