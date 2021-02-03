@@ -30,7 +30,14 @@ const ContactList = () => {
     <Container>
       <ContactsMenu />
       {contacts.length > 0 ? (
-        <ul className={s.contactList}>
+        <ul
+          style={{
+            listStyle: "none",
+            paddingInlineStart: "0",
+            display: "flex",
+            flexWrap: "wrap",
+          }}
+        >
           {contacts.map(({ id, name, number }) => (
             <li key={id} className={s.contactList__item}>
               <Contact
